@@ -1,0 +1,43 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.menu-awal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #88c0ff url('../welcomePageBg.jpg') center/cover no-repeat;
+}
+
+.menu-box {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.btn-start {
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2b8a3e;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-start:hover {
+  opacity: 0.9;
+}
+
+#wadah-game {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url('../mapBg.jpg') center/cover no-repeat;
+  position: relative;
+}

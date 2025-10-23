@@ -1,0 +1,452 @@
+
+/* Reset dan Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* Canvas Container */
+#canvasContainer {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Game UI Overlay */
+.game-ui {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.game-ui * {
+    pointer-events: auto;
+}
+
+/* Dialog Bubble dengan Ekor */
+.dialog-bubble {
+    position: relative;
+    animation: bounce-dialog 1s ease-in-out infinite;
+}
+
+.dialog-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid white;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+/* Animasi Bounce untuk Dialog */
+@keyframes bounce-dialog {
+    0%, 100% {
+        transform: translate(-50%, 0);
+    }
+    50% {
+        transform: translate(-50%, -10px);
+    }
+}
+
+/* Animasi Fade In */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Animasi Pulse untuk Button */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Animasi Glow */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.4);
+    }
+}
+
+.btn-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.loading-screen.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.loading-progress {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Header Stats */
+.stat-badge {
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.stat-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease;
+}
+
+/* Pilihan Jawaban Hover Effect */
+.pilihan-jawaban {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pilihan-jawaban:hover {
+    transform: translateX(5px);
+    border-color: #3b82f6;
+    background: linear-gradient(to right, #eff6ff, #dbeafe);
+}
+
+.pilihan-jawaban:active {
+    transform: scale(0.98);
+}
+
+.pilihan-jawaban.selected {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    border-color: #1e40af;
+    transform: scale(1.02);
+}
+
+.pilihan-jawaban.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* NPC Avatar Styles */
+.npc-avatar {
+    position: relative;
+    overflow: hidden;
+}
+
+.npc-avatar::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* Hasil Jawaban Card */
+.hasil-card {
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Welcome Page Background */
+.welcome-bg {
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.6),
+        rgba(0, 0, 0, 0.3)
+    );
+    z-index: 1;
+}
+
+.welcome-bg > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Button Styles */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+/* Kontrol Info Box */
+.kontrol-info {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Progress Notification */
+.progress-notification {
+    animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -100%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Nyawa Display */
+.nyawa-container {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.nyawa-icon {
+    display: inline-block;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.nyawa-icon:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.nyawa-icon:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.nyawa-icon:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10%, 30% {
+        transform: scale(1.2);
+    }
+    20%, 40% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dialog-bubble {
+        max-width: 90vw;
+        padding: 1rem;
+    }
+    
+    .stat-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .loading-text {
+        font-size: 18px;
+    }
+}
+
+/* Smooth Scrollbar untuk Modal */
+.modal-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.7);
+}
+
+/* Pancasila Theme Colors */
+.sila-1 { background: linear-gradient(135deg, #FFD700, #FFA500); }
+.sila-2 { background: linear-gradient(135deg, #FF6B6B, #C92A2A); }
+.sila-3 { background: linear-gradient(135deg, #4ECDC4, #1A936F); }
+.sila-4 { background: linear-gradient(135deg, #95E1D3, #38A3A5); }
+.sila-5 { background: linear-gradient(135deg, #AA96DA, #6C5CE7); }
+
+/* Ending Screen Animations */
+.ending-screen {
+    animation: zoomIn 0.8s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Konfetti Effect */
+@keyframes konfetti-fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+.konfetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #FFD700;
+    top: -10px;
+    animation: konfetti-fall 3s linear infinite;
+    z-index: 10000;
+}
